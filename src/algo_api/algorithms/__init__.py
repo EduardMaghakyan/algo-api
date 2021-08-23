@@ -1,1 +1,1 @@
-from .numeric import ackermann, fib_iter
+from .numeric import ackermann, factorial, fib_iter
