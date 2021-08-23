@@ -1,5 +1,5 @@
 from fastapi import FastAPI, Request
-from prometheus_client import CollectorRegistry, Summary, push_to_gateway
+from prometheus_client import CollectorRegistry, Histogram, Summary, push_to_gateway
 from starlette.responses import RedirectResponse
 
 from . import v1
@@ -12,13 +12,23 @@ app = FastAPI(
 )
 registry = CollectorRegistry()
 request_time = Summary(
-    "request_processing_seconds", "Time spent processing request", ('method', 'endpoint'), registry=registry
+    "request_processing_seconds",
+    "Time spent processing request",
+    ("method", "endpoint"),
+    registry=registry,
+)
+
+request_latency = Histogram(
+    "request_latency_seconds", "Request latency", ["method", "endpoint"], registry=registry
 )
 
 
 @app.middleware("http")
 async def add_summary_to_prometheus(request: Request, call_next):
-    with request_time.labels(request.method, str(request.scope["path"])).time():
+    request_path = str(request.scope["path"])
+    with request_time.labels(request.method, request_path).time(), request_latency.labels(
+        request_latency, request_path
+    ).time():
         response = await call_next(request)
         try:
             push_to_gateway("pushgateway:9091", job="algo-api", registry=registry)
