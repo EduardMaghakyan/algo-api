@@ -17,7 +17,7 @@ router = APIRouter()
     response_model=int,
     status_code=200,
 )
-def handle_fibonacci(n: int) -> int:
+def handle_fibonacci(n: int) -> Optional[int]:
     if n < 0:
         raise HTTPException(
             status_code=422, detail=f"Can't calculate Fibonacci number for negative integers."
