@@ -15,7 +15,7 @@ def main():
 
 @click.command()
 @click.argument("n", type=int, required=True)
-def fibonacci(n: int):
+def invoke_fibonacci(n: int):
     _LOG.info(f"Calculating Fibonacci of {n}")
     print(f"{fib_iter(int(n))}")
 
@@ -23,12 +23,12 @@ def fibonacci(n: int):
 @click.command()
 @click.argument("m", type=int, required=True)
 @click.argument("n", type=int, required=True)
-def ackermann(m: int, n: int):
+def invoke_ackermann(m: int, n: int):
     _LOG.info(f"Calculating Ackerman function of {m} and {n}")
     print(f"{ackermann(int(m), int(n))}")
 
 
-main.add_command(fibonacci)
-main.add_command(ackermann)
+main.add_command(invoke_fibonacci)
+main.add_command(invoke_ackermann)
 if __name__ == "__main__":
     main()

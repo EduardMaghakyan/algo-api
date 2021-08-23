@@ -1,3 +1,5 @@
+from typing import Optional
+
 from fastapi import APIRouter
 from fastapi.exceptions import HTTPException
 
@@ -15,7 +17,7 @@ router = APIRouter()
     response_model=int,
     status_code=200,
 )
-def fibonacci(n: int) -> int:
+def handle_fibonacci(n: int) -> int:
     if n < 0:
         raise HTTPException(
             status_code=422, detail=f"Can't calculate Fibonacci number for negative integers."
@@ -38,7 +40,7 @@ def fibonacci(n: int) -> int:
     response_model=int,
     status_code=200,
 )
-def ackermann(m: int, n: int) -> int:
+def handle_ackermann(m: int, n: int) -> Optional[int]:
     if n < 0 or m < 0:
         raise HTTPException(
             status_code=422, detail=f"Can't calculate Ackermann number for negative integers."

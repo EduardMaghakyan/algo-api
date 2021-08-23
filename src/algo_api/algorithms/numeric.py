@@ -1,3 +1,6 @@
+from typing import Optional
+
+
 def fib_rec(n: int) -> int:
     if n < 2:
         return n
@@ -12,7 +15,11 @@ def fib_iter(n: int) -> int:
 
     return first
 
-def ackermann(m: int, n: int) -> int:
+
+def ackermann(m: int, n: Optional[int]) -> Optional[int]:
+    if n is None or m < 0 or n < 0:
+        return None
+
     if m == 0:
         return n + 1
     if n == 0:
