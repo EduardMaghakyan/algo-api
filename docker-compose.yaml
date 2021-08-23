@@ -3,10 +3,28 @@ version: '3.7'
 services:
 
   algo-api:
-    build: .
+    build: ./algorithms
     container_name: algo-api
     ports: 
       - 8000:8000
     volumes:
       - ./src:/app/src
+    restart: always
+
+  prometheus:
+    build: ./prometheus
+    ports: 
+      - 9090:9090
+    restart: always
+
+  pushgateway:
+    image: prom/pushgateway
+    ports: 
+      - 9091:9091
+    restart: always
+
+  loadgen:
+    build: ./loadgen
+    environment:
+      - FRONTEND_ADDR=algo-api:8000
     restart: always

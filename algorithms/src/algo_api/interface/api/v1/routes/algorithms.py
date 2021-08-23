@@ -1,5 +1,4 @@
 from typing import Optional
-from typing import Optional
 
 from fastapi import APIRouter
 from fastapi.exceptions import HTTPException
