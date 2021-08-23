@@ -3,7 +3,7 @@ import logging
 import click
 
 from algo_api import config
-from algo_api.algorithms import ackermann, fib_iter
+from algo_api.algorithms import ackermann, factorial, fib_iter
 
 _LOG = logging.getLogger(__name__)
 
@@ -28,7 +28,15 @@ def invoke_ackermann(m: int, n: int):
     print(f"{ackermann(int(m), int(n))}")
 
 
-main.add_command(invoke_fibonacci)
-main.add_command(invoke_ackermann)
+@click.command()
+@click.argument("n", type=int, required=True)
+def invoke_factorial(n: int):
+    _LOG.info(f"Calculating factorial of {n}")
+    print(f"{factorial(int(n))}")
+
+
+main.add_command(invoke_fibonacci, "fibonacci")
+main.add_command(invoke_ackermann, "ackerman")
+main.add_command(invoke_factorial, "factorial")
 if __name__ == "__main__":
     main()
