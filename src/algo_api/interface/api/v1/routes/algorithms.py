@@ -24,7 +24,7 @@ def handle_fibonacci(n: int) -> Optional[int]:
         )
 
     try:
-        return fib_iter(n)
+        return fib_iter(int(n))
     except Exception as e:
         raise HTTPException(
             status_code=500, detail=f"Something went wrong while calculateing fibonacci of {n}"
@@ -47,7 +47,7 @@ def handle_ackermann(m: int, n: int) -> Optional[int]:
         )
 
     try:
-        return ackermann(m, n)
+        return ackermann(int(m), int(n))
     except Exception as e:
         raise HTTPException(
             status_code=500, detail=f"Something went wrong while calculateing Ackermann of {m} {n}"
