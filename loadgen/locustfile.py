@@ -23,7 +23,7 @@ class UserBehavior(TaskSet):
 
     tasks = {docs: 1,
         ackermann: 2,
-        fibonacci: 10,
+        fibonacci: 2,
         factorial: 2
         }
 

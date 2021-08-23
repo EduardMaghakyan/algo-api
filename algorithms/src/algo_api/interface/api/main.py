@@ -12,13 +12,13 @@ app = FastAPI(
 )
 registry = CollectorRegistry()
 request_time = Summary(
-    "request_processing_seconds", "Time spent processing request", registry=registry
+    "request_processing_seconds", "Time spent processing request", ('method', 'endpoint'), registry=registry
 )
 
 
 @app.middleware("http")
 async def add_summary_to_prometheus(request: Request, call_next):
-    with request_time.time():
+    with request_time.labels(request.method, str(request.scope["path"])).time():
         response = await call_next(request)
         try:
             push_to_gateway("pushgateway:9091", job="algo-api", registry=registry)
