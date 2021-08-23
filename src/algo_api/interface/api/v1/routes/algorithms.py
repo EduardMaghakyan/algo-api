@@ -1,7 +1,7 @@
 from fastapi import APIRouter
 from fastapi.exceptions import HTTPException
 
-from algo_api.algorithms import acker, fib_iter
+from algo_api.algorithms import ackermann, fib_iter
 
 router = APIRouter()
 
@@ -45,7 +45,7 @@ def ackermann(m: int, n: int) -> int:
         )
 
     try:
-        return acker(m, n)
+        return ackermann(m, n)
     except Exception as e:
         raise HTTPException(
             status_code=500, detail=f"Something went wrong while calculateing Ackermann of {m} {n}"

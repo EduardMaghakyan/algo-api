@@ -1,6 +1,6 @@
 import pytest
 
-from algo_api.algorithms.ackermann import acker
+from algo_api.algorithms import ackermann
 
 
 def ackerman_test_cases():
@@ -11,5 +11,5 @@ def ackerman_test_cases():
 
 @pytest.mark.parametrize(["m", "n", "expected"], ackerman_test_cases())
 def test_fib_rec(m, n, expected):
-    got = acker(m, n)
-    assert expected == got, f"Expecting ackerman of {m, n} to be {expected}, got {got}"
+    got = ackermann(m, n)
+    assert expected == got, f"Expecting Ackerman of {m, n} to be {expected}, got {got}"

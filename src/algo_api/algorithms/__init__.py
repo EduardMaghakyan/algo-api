@@ -1,2 +1,1 @@
-from .ackermann import acker
-from .fibonacci import fib_iter, fib_rec
+from .numeric import ackermann, fib_iter, fib_rec

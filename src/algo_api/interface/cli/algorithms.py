@@ -3,7 +3,7 @@ import logging
 import click
 
 from algo_api import config
-from algo_api.algorithms import acker, fib_iter
+from algo_api.algorithms import ackermann, fib_iter
 
 _LOG = logging.getLogger(__name__)
 
@@ -25,7 +25,7 @@ def fibonacci(n: int):
 @click.argument("n", type=int, required=True)
 def ackermann(m: int, n: int):
     _LOG.info(f"Calculating Ackerman function of {m} and {n}")
-    print(f"{acker(int(m), int(n))}")
+    print(f"{ackermann(int(m), int(n))}")
 
 
 main.add_command(fibonacci)
